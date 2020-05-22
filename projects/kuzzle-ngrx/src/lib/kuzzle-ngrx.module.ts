@@ -2,7 +2,6 @@ import {
   NgModule,
   Injector,
   ModuleWithProviders,
-  InjectionToken,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Kuzzle } from 'kuzzle-sdk';
@@ -31,12 +30,12 @@ import {
     },
   ],
 })
-export class KuzzleModule {
+export class KuzzleNgrxModule {
   static forRoot(
     config: KuzzleModuleConfig
-  ): ModuleWithProviders<KuzzleModule> {
+  ): ModuleWithProviders<KuzzleNgrxModule> {
     return {
-      ngModule: KuzzleModule,
+      ngModule: KuzzleNgrxModule,
       providers: [{ provide: KUZZLE_CONFIG, useValue: config }],
     };
   }

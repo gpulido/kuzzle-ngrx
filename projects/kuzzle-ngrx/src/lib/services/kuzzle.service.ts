@@ -92,7 +92,7 @@ export class KuzzleService {
           sendResult.error(error);
         })
     ).pipe(
-      switchMap(id => {
+      switchMap((id: string | void) => {
         console.log('subscribe with id', id);
         roomId = id;
         return sendResult.asObservable();

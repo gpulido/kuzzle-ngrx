@@ -4,13 +4,22 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { KuzzleNgrxModule } from 'kuzzle-ngrx';
 
+const kuzzleConfig = {
+  endpoint: 'kuzzle.test.com',
+  index: 'my-index',
+  options: {
+    port: 443,
+    sslConnection: true,
+  },
+};
+
 @NgModule({
   declarations: [
     AppComponent
   ],
   imports: [
     BrowserModule,
-    KuzzleNgrxModule
+    KuzzleNgrxModule.forRoot(kuzzleConfig)
   ],
   providers: [],
   bootstrap: [AppComponent]
