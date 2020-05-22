@@ -1,6 +1,6 @@
-This readme is a WIP.
-
 # KuzzleNgrx
+
+This readme is a WIP.
 
 This is a [Kuzzle](https://kuzzle.io/) Angular client library that allows to use kuzzle as  database backend authorization /realtime / file sharing.
 It is developed to be a direct drop-in of the http entitycollection for[https://ngrx.io/guide/data](@Ngrx/data) using the same api.
@@ -22,15 +22,18 @@ Also an instance of Kuzzle must be accesible.
 After doing it:
 
 1) Create the model that supports the entity. It has to extend the IdModel class.
+
 ```ts
   export interface Tournament extends IdModel {
       description: string;
       longDescription: string;
    }
-``` 
+```
+
 2) Create a collection in Kuzzle with an schema similar as this:
    The schema has to be strict. And the meta is not necesary at this moment but it will be
    used in the future.
+
 ```ts
   export const tournamentMapping = {
     dynamic: 'strict',
@@ -43,11 +46,13 @@ After doing it:
     }
   }
 ```
+
 You can also create this mapping as a const inside angular and create or update the schema in kuzzle using the schema updater service of this library. Be aware that this is in early stages of development.
 
 3) Create the tournaments-data and tournament-entity services as stated by ngrx, but in this case they has to extends the classes of kuzzle-ngrx:
 
 tournament-entity-service.ts
+
 ```ts   
   import { KuzzleRealtimeEntityService } from 'kuzzle-ngrx';
   import { KuzzleService } from 'kuzzle-ngrx';
@@ -60,7 +65,9 @@ tournament-entity-service.ts
   }
 
 ```
+
 tournaments-data.service.ts
+
 ```ts
 import { KuzzleDataService } from 'kuzzle-ngrx';
 import { KuzzleService } from 'kuzzle-ngrx';
@@ -73,6 +80,7 @@ export class TournamentsDataService extends KuzzleDataService<Tournament> {
 }
 
 ```
+
 4) Register those entities on ngrx for the module. This is the same as regular ngrx data and entity way:
 
 ```ts
@@ -87,24 +95,25 @@ const entityMetadada: EntityMetadataMap = {
     ...
   ],
   providers: [
-    TournamentEntityService,    
-    TournamentsDataService,    
+    TournamentEntityService,
+    TournamentsDataService,
   ],
 
    export class TournamentsModule {
   constructor(
     eds: EntityDefinitionService,
     entityDataService: EntityDataService,
-    tournamentsDataService: TournamentsDataService,    
+    tournamentsDataService: TournamentsDataService,
   ) {
     eds.registerMetadataMap(entityMetadada);
-    entityDataService.registerService('Tournament', tournamentsDataService);    
+    entityDataService.registerService('Tournament', tournamentsDataService);
 
   }
 }
 
 ```
-5) Import the KuzzleNgrxModule into your app module at root level providing the kuzzle configuration:
+5) Import the KuzzleNgrxModule into your app module at root level providing the kuzzle configuration
+   
   ```ts
   export const kuzzleConfig = {
     endpoint: 'kuzzle.test.com',
@@ -118,13 +127,17 @@ const entityMetadada: EntityMetadataMap = {
   KuzzleNgrxModule.forRoot(kuzzleConfig),
 
 ```
+
 6) Anytime you need to manage the data use the EntityService as usual.
 
 # Realtime
+
 The first time a EntityService is injected it starts a realtime subscription to kuzzle so the entityService cache is being continuously updated with the changes from the kuzzle collection. This mechanism can't be disconnected at this moment but a configuration option maybe added in the future.
 
 # Example application
+
 TODO
 
 # Build from source code.
+
 TODO
