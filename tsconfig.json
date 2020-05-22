@@ -14,7 +14,13 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "kuzzle-ngrx": [
+        "dist/kuzzle-ngrx/kuzzle-ngrx",
+        "dist/kuzzle-ngrx"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
