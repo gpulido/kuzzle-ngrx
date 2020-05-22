@@ -1,5 +1,6 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { KuzzleFilesService } from 'kuzzle-ngrx';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {

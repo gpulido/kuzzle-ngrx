@@ -13,11 +13,13 @@ import {
   KuzzleModuleConfig,
   KuzzleService,
 } from './services/kuzzle.service';
+import { KuzzleFilesService } from './services/kuzzle-files.service';
 
 @NgModule({
   declarations: [],
   imports: [CommonModule],
   providers: [
+    KuzzleService,
     {
       provide: KUZZLE_PROTOCOL,
       useFactory: KuzzleProtocolFactory,
