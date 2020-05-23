@@ -9,9 +9,9 @@ Technically is just a wrapper around the great [https://docs.kuzzle.io/sdk/js/7/
 
 It uses the same data design conventions than the ngrx data library.
 
-Each entity should be mapped to a collection on Kuzzle, and relations has to be managed externally.
+Each entity should be mapped to a collection on Kuzzle, and relations have to be managed externally.
 
-[Realtime capabilities](https://docs.kuzzle.io/core/2/guides/essentials/real-time/) are right out of the box, so entity cache updates are being doing in background automatically.
+[Realtime capabilities](https://docs.kuzzle.io/core/2/guides/essentials/real-time/) are right out of the box, so entity cache updates are being done in background automatically.
 
 # Installation
 
