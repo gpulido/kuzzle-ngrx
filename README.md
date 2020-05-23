@@ -23,6 +23,10 @@ You must add `kuzzle-sdk` to your project alongside `kuzzle-ngrx`.
 $ npm install kuzzle-sdk kuzzle-ngrx
 ```
 
+## Files service
+
+The Files service use [Kuzzle S3 Plugin](https://github.com/kuzzleio/kuzzle-plugin-s3) so you have to install it on your Kuzzle server to use these functionnalities.
+
 # Configuration
 
 This ngrx data extension is configured and used almost the same way as in ngrx.
@@ -157,6 +161,10 @@ export class TournamentsModule {
 # Realtime
 
 The first time a EntityService is injected it starts a realtime subscription to kuzzle so the entityService cache is being continuously updated with the changes from the kuzzle collection. This mechanism can't be disconnected at this moment but a configuration option maybe added in the future.
+
+### Current limitations
+
+ - `m*` methods are not handled and thus does not updates automatically the entityService cache.
 
 # Example application
 

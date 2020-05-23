@@ -10,7 +10,7 @@ import { KuzzleService } from './kuzzle.service';
 
 export class KuzzleRealtimeEntityService<
   T extends IdModel
-> extends EntityCollectionServiceBase<T> {
+  > extends EntityCollectionServiceBase<T> {
   filters = {};
 
   realtimeSubs: Subscription;
@@ -95,6 +95,8 @@ export class KuzzleRealtimeEntityService<
             ...notification.result._source,
           } as T;
           switch (notification.action) {
+            // m* routes are not handled
+            case 'createOrReplace':
             case 'update':
             case 'replace':
               this.updateOneInCache(entity);

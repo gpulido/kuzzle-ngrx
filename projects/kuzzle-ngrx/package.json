@@ -1,22 +1,19 @@
 {
   "name": "kuzzle-ngrx",
   "version": "0.0.1",
-  "author": {"name":"Gabriel Pulido de Torres"},
+  "author": {
+    "name": "Gabriel Pulido de Torres"
+  },
   "dependencies": {
-    "kuzzle-sdk": "^7.2.0",
     "tslib": "^1.10.0"
   },
   "peerDependencies": {
     "@angular/common": "^9.1.7",
     "@angular/core": "^9.1.7",
-
     "@ngrx/entity": "^9.1.2",
     "@ngrx/data": "^9.1.2",
     "@ngrx/store": "^9.1.2",
-    "@ngrx/effects": "^9.1.2"
-
-  },
-  "whitelistedNonPeerDependencies": [
-    "kuzzle-sdk"
-  ]
+    "@ngrx/effects": "^9.1.2",
+    "kuzzle-sdk": "~7.x"
+  }
 }
