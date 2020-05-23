@@ -1,0 +1,37 @@
+<mdc-top-app-bar [fixed]="true">
+  <mdc-top-app-bar-row>
+    <mdc-top-app-bar-section align="start" title="Kuzzle Ngrx">
+      <div fxHide.gt-xs>
+        <button mdcTopAppBarNavIcon (click)="onToggleSidenav()">
+          <mdc-icon>menu</mdc-icon>
+        </button>
+      </div>
+      <div>
+        <a routerLink="/">
+          <mdc-ripple [attachTo]="logo">
+            <img
+              #logo
+              alt="Home"
+              height="40"
+              src="assets/logo.svg"
+              title="Home"
+              width="40"
+            />
+          </mdc-ripple>
+        </a>
+      </div>
+    </mdc-top-app-bar-section>
+    <!-- <mdc-top-app-bar-section  align="end" >
+      <div fxLayout fxLayoutGap="20px" fxHide.xs>
+        <mdc-icon  mdcTopAppBarActionItem (click)="profileMenu.open = !profileMenu.open">more_vert</mdc-icon>
+        <div mdcMenuSurfaceAnchor #menuAnchor>
+          <mdc-menu #profileMenu [anchorElement]="menuAnchor"  anchorCorner="bottomEnd">
+            <mdc-list>
+                <a mdc-list-item  (click)="onInitDB()">Initialize db</a>
+            </mdc-list>
+          </mdc-menu>
+        </div>
+      </div>
+    </mdc-top-app-bar-section> -->
+  </mdc-top-app-bar-row>
+</mdc-top-app-bar>

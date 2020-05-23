@@ -43,41 +43,46 @@
         }
       }
     },
-    "kuzzle-tester": {
+    "kuzzle-demo": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
           "style": "scss"
         }
       },
-      "root": "projects/kuzzle-tester",
-      "sourceRoot": "projects/kuzzle-tester/src",
+      "root": "projects/kuzzle-demo",
+      "sourceRoot": "projects/kuzzle-demo/src",
       "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/kuzzle-tester",
-            "index": "projects/kuzzle-tester/src/index.html",
-            "main": "projects/kuzzle-tester/src/main.ts",
-            "polyfills": "projects/kuzzle-tester/src/polyfills.ts",
-            "tsConfig": "projects/kuzzle-tester/tsconfig.app.json",
+            "outputPath": "dist/kuzzle-demo",
+            "index": "projects/kuzzle-demo/src/index.html",
+            "main": "projects/kuzzle-demo/src/main.ts",
+            "polyfills": "projects/kuzzle-demo/src/polyfills.ts",
+            "tsConfig": "projects/kuzzle-demo/tsconfig.app.json",
             "aot": true,
             "assets": [
-              "projects/kuzzle-tester/src/favicon.ico",
-              "projects/kuzzle-tester/src/assets"
+              "projects/kuzzle-demo/src/favicon.ico",
+              "projects/kuzzle-demo/src/assets"
             ],
             "styles": [
-              "projects/kuzzle-tester/src/styles.scss"
+              "projects/kuzzle-demo/src/styles.scss"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/"
+              ]
+            },
             "scripts": []
           },
           "configurations": {
             "production": {
               "fileReplacements": [
                 {
-                  "replace": "projects/kuzzle-tester/src/environments/environment.ts",
-                  "with": "projects/kuzzle-tester/src/environments/environment.prod.ts"
+                  "replace": "projects/kuzzle-demo/src/environments/environment.ts",
+                  "with": "projects/kuzzle-demo/src/environments/environment.prod.ts"
                 }
               ],
               "optimization": true,
@@ -106,33 +111,33 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "kuzzle-tester:build"
+            "browserTarget": "kuzzle-demo:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "kuzzle-tester:build:production"
+              "browserTarget": "kuzzle-demo:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "kuzzle-tester:build"
+            "browserTarget": "kuzzle-demo:build"
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/kuzzle-tester/src/test.ts",
-            "polyfills": "projects/kuzzle-tester/src/polyfills.ts",
-            "tsConfig": "projects/kuzzle-tester/tsconfig.spec.json",
-            "karmaConfig": "projects/kuzzle-tester/karma.conf.js",
+            "main": "projects/kuzzle-demo/src/test.ts",
+            "polyfills": "projects/kuzzle-demo/src/polyfills.ts",
+            "tsConfig": "projects/kuzzle-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/kuzzle-demo/karma.conf.js",
             "assets": [
-              "projects/kuzzle-tester/src/favicon.ico",
-              "projects/kuzzle-tester/src/assets"
+              "projects/kuzzle-demo/src/favicon.ico",
+              "projects/kuzzle-demo/src/assets"
             ],
             "styles": [
-              "projects/kuzzle-tester/src/styles.scss"
+              "projects/kuzzle-demo/src/styles.scss"
             ],
             "scripts": []
           }
@@ -141,9 +146,9 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/kuzzle-tester/tsconfig.app.json",
-              "projects/kuzzle-tester/tsconfig.spec.json",
-              "projects/kuzzle-tester/e2e/tsconfig.json"
+              "projects/kuzzle-demo/tsconfig.app.json",
+              "projects/kuzzle-demo/tsconfig.spec.json",
+              "projects/kuzzle-demo/e2e/tsconfig.json"
             ],
             "exclude": [
               "**/node_modules/**"
@@ -153,17 +158,18 @@
         "e2e": {
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
-            "protractorConfig": "projects/kuzzle-tester/e2e/protractor.conf.js",
-            "devServerTarget": "kuzzle-tester:serve"
+            "protractorConfig": "projects/kuzzle-demo/e2e/protractor.conf.js",
+            "devServerTarget": "kuzzle-demo:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "kuzzle-tester:serve:production"
+              "devServerTarget": "kuzzle-demo:serve:production"
             }
           }
         }
       }
-    }},
+    }
+  },
   "cli": {
     "analytics": "112af26e-25bf-4e9b-8144-918bb2ea041c"
   },

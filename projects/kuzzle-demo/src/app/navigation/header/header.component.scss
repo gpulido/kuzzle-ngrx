@@ -1,0 +1,17 @@
+@use '@material/top-app-bar/mdc-top-app-bar';
+@use '@material/top-app-bar/_index';
+
+.logobutton
+{
+  // @include mdc-icon-button-size(40px, 40px, 0);
+  padding:0px;
+  height: 40px;
+  width: 40px;
+
+}
+
+.baritemlink
+{
+    margin: 0px;
+    padding: 7px;
+}

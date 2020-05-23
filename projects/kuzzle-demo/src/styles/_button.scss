@@ -1,0 +1,13 @@
+// styles/_button.scss
+
+@use '@material/button/mdc-button';
+@use '@material/button';
+@use '@material/theme';
+
+.button-primary {
+  @include button.filled-accessible(theme.$primary);
+}
+
+.button-secondary {
+  @include button.filled-accessible(theme.$secondary);
+}
