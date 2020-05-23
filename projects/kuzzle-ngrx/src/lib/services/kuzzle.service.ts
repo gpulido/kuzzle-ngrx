@@ -58,7 +58,7 @@ export class KuzzleService {
     this.kuzzle.on('reconnected', () => sendResult.next({ event: 'reconnected' }));
     this.kuzzle.on('loginAttempt', data => sendResult.next({ event: 'loginAttempt', data }));
     this.kuzzle.on('networkError', data => sendResult.next({ event: 'networkError', data }));
-    this.kuzzle.on('tokenExpired', () => sendResult.next({ event: 'connected' }));
+    this.kuzzle.on('tokenExpired', () => sendResult.next({ event: 'tokenExpired' }));
     const alreadyConnected = of({ event: this.kuzzle.connected ? 'connected' : 'disconnected' } as KuzzleModuleEvent);
     return merge(alreadyConnected, sendResult.asObservable());
   }
