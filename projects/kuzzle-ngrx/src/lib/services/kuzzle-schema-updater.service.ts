@@ -26,3 +26,38 @@ export class KuzzleSchemaUpdaterService {
     return promises;
   }
 }
+
+// describe('#updateMapping', () => {
+//   let expectedHeroes: Hero[];
+//   const heroesMapping: ObjectWithAnyKeys = {
+//     name: 'text',
+//   };
+//   beforeEach(() => {
+//     expectedHeroes = [
+//       { id: '1', name: 'A' },
+//       { id: '2', name: 'B' },
+//     ] as Hero[];
+//   });
+
+//   it('should create collection if not exist', async () => {
+//     kuzzleService.kuzzle.collection.exists.mockResolvedValue(
+//       Promise.resolve(false)
+//     );
+//     await kuzzleDataService.updateOrCreateMapping(heroesMapping);
+//     expect(kuzzleService.kuzzle.collection.create.mock.calls.length).toBe(1);
+//     expect(
+//       kuzzleService.kuzzle.collection.updateMapping.mock.calls.length
+//     ).toBe(0);
+//   });
+
+//   it('should update collection mapping if exists', async () => {
+//     kuzzleService.kuzzle.collection.exists.mockResolvedValue(
+//       Promise.resolve(true)
+//     );
+//     await kuzzleDataService.updateOrCreateMapping(heroesMapping);
+//     expect(kuzzleService.kuzzle.collection.create.mock.calls.length).toBe(0);
+//     expect(
+//       kuzzleService.kuzzle.collection.updateMapping.mock.calls.length
+//     ).toBe(1);
+//   });
+// });
