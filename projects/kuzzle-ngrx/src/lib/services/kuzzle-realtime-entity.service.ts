@@ -35,49 +35,7 @@ export class KuzzleRealtimeEntityService<
       filter((e) => e !== null),
       switchMap((_) => this.getAll())
     );
-    // this.realtimeSubs = this.kuzzleService
-    //   .kuzzleEvent()
-    //   .pipe(
-    //     // switchMap(e => {
-    //     //   if (e.event === 'connected' || e.event === 'reconnected') {
-    //     //     return this.getAll();
-    //     //   } else {
-    //     //     return of(null);
-    //     //   }
-    //     // }),
-    //     // filter(e => e !== null),
-    //     switchMap(_ => {
-    //       this.getAll();
-    //       return this.kuzzleService.realtime(this.entityName.toLowerCase(), this.filters).pipe(
-    //         catchError(err => {
-    //           console.log(err);
-    //           return null;
-    //         }),
-    //         filter(n => n !== null)
-    //       );
-    //     })
-    //   )
-    //   .subscribe(
-    //     (notification: WebsocketEventDocument) => {
-    //       console.log(notification);
-    //       const entity = { id: notification.result._id, ...notification.result._source } as T;
-    //       switch (notification.action) {
-    //         case 'update':
-    //         case 'replace':
-    //           this.updateOneInCache(entity);
-    //           break;
-    //         case 'create':
-    //           this.addOneToCache(entity);
-    //           break;
-    //         case 'delete':
-    //           this.removeOneFromCache(entity);
-    //           break;
-    //         default:
-    //           break;
-    //       }
-    //     },
-    //     err => console.log('error subsc', err)
-    //   );
+
     this.realtimeSubs = this.kuzzleService
       .realtime(this.entityName.toLowerCase(), this.filters)
       .pipe(
@@ -90,22 +48,28 @@ export class KuzzleRealtimeEntityService<
       .subscribe(
         (notification: WebsocketEventDocument) => {
           console.log(notification);
-          const entity = {
-            id: notification.result._id,
-            ...notification.result._source,
-          } as T;
           switch (notification.action) {
-            // m* routes are not handled
             case 'createOrReplace':
             case 'update':
             case 'replace':
-              this.updateOneInCache(entity);
+              this.updateOneInCache(this.getEntityFromNotification(notification));
               break;
             case 'create':
-              this.addOneToCache(entity);
+              this.addOneToCache(this.getEntityFromNotification(notification));
               break;
             case 'delete':
-              this.removeOneFromCache(entity);
+              this.removeOneFromCache(notification.result._id);
+              break;
+            case 'mCreate':
+              this.addManyToCache(this.getEntitiesFromNotification(notification));
+              break;
+            case 'mCreateOrReplace':
+            case 'mReplace':
+            case 'mUpdate':
+              this.updateManyInCache(this.getEntitiesFromNotification(notification));
+              break;
+            case 'mDelete':
+              this.removeManyFromCache(notification.result.successes);
               break;
             default:
               break;
@@ -113,5 +77,15 @@ export class KuzzleRealtimeEntityService<
         },
         (err) => console.log('error subsc', err)
       );
+  }
+
+  getEntityFromNotification(notification:WebsocketEventDocument): T {
+    return {
+      id: notification.result._id,
+      ...notification.result._source,
+    } as T;
+  }
+  getEntitiesFromNotification(notification: WebsocketEventDocument): T[]{
+    return notification.result.successes.map(e =>  ({id: e._id, ...e._source}) as T);
   }
 }

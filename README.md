@@ -162,10 +162,6 @@ export class TournamentsModule {
 
 The first time a EntityService is injected it starts a realtime subscription to kuzzle so the entityService cache is being continuously updated with the changes from the kuzzle collection. This mechanism can't be disconnected at this moment but a configuration option maybe added in the future.
 
-### Current limitations
-
- - `m*` methods are not handled and thus does not updates automatically the entityService cache.
-
 # Example application
 
 TODO
