@@ -9,8 +9,11 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "build_lib": "ng build kuzzle-ngrx",
+    "copy-license": "cp ./LICENSE.md ./dist/kuzzle-ngrx",
+    "copy-readme": "cp ./README.md ./dist/kuzzle-ngrx",
+    "copy-files": "npm run copy-license && npm run copy-readme",
     "npm_pack": "cd dist/kuzzle-ngrx && npm pack",
-    "package": "npm run build_lib && npm run npm_pack"
+    "package": "npm run build_lib && npm run copy-files && npm run npm_pack"
   },
   "private": true,
   "dependencies": {

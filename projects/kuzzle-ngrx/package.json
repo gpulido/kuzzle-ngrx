@@ -1,15 +1,23 @@
 {
   "name": "kuzzle-ngrx",
   "version": "0.0.1",
+  "description": "Angular ngrx extension to Kuzzle as backend",
   "author": {
     "name": "Gabriel Pulido de Torres"
   },
+  "keywords": ["Angular", "Kuzzle", "ngrx","library"],
+  "license": "SEE LICENSE IN LICENSE.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gpulido/kuzzle-ngrx"
+  },
+  "homepage": "https://github.com/gpulido/kuzzle-ngrx",
   "dependencies": {
-    "tslib": "^1.10.0"
   },
   "peerDependencies": {
     "@angular/common": "^9.1.7",
     "@angular/core": "^9.1.7",
+    "tslib": "^1.10.0",
     "@ngrx/entity": "^9.1.2",
     "@ngrx/data": "^9.1.2",
     "@ngrx/store": "^9.1.2",
