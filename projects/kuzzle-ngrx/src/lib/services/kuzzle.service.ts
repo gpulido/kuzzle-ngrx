@@ -112,12 +112,8 @@ export class KuzzleService {
   }
 
   public async updateOrCreateMapping(collection: string, mapping: ObjectWithAnyKeys): Promise<void> {
-    const exists = await this.kuzzle.collection.exists(this.index, collection.toLowerCase());
-    if (exists) {
-      await this.kuzzle.collection.updateMapping(this.index, collection.toLowerCase(), mapping);
-    } else {
-      await this.kuzzle.collection.create(this.index, collection.toLowerCase(), mapping);
-    }
+    // Subsequent calls to collection:create updates existent mappings
+    await this.kuzzle.collection.create(this.index, collection.toLowerCase(), mapping);
   }
   public createEntity<T>(entityCollection: string, entity: T, id: string): Observable<T> {
     return from(this.kuzzle.document.create(this.index, entityCollection.toLowerCase(), entity, id)).pipe(
@@ -135,7 +131,7 @@ export class KuzzleService {
     );
   }
   public updateEntity<T>(entityCollection: string, id: string, changes: Partial<T>): Observable<T> {
-    return from(this.kuzzle.document.update(this.index, entityCollection.toLowerCase(), id as string, changes)).pipe(
+    return from(this.kuzzle.document.update(this.index, entityCollection.toLowerCase(), id as string, changes, { retryOnConflict: 10 })).pipe(
       map(r => r as KuzzleDocument<T>),
       map(r => ({ id: r._id, ...r._source }))
     );

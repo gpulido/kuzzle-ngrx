@@ -5,18 +5,24 @@ import { KuzzleService } from './kuzzle.service';
   providedIn: 'root'
 })
 export class KuzzleSchemaUpdaterService {
-  constructor(private kuzzleService: KuzzleService) {}
+  constructor(private kuzzleService: KuzzleService) { }
 
-  updateSchemas(moduleMappings: any[]): void {
-    moduleMappings.forEach(m => this.updateMappingsForModule(m));
+  async updateSchemas(moduleMappings: any[]): Promise<void> {
+    for (const moduleMapping of moduleMappings) {
+      await this.updateMappingsForModule(moduleMapping)
+    }
   }
 
-  private updateMappingsForModule(moduleMapping: any): void {
+  private updateMappingsForModule(moduleMapping: any): Promise<void>[] {
+    const promises = [];
+
     for (const key in moduleMapping) {
       if (Object.prototype.hasOwnProperty.call(moduleMapping, key)) {
         const value = moduleMapping[key];
-        this.kuzzleService.updateOrCreateMapping(key, value);
+        promises.push(this.kuzzleService.updateOrCreateMapping(key, value));
       }
     }
+
+    return promises;
   }
 }

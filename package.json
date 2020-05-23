@@ -26,7 +26,6 @@
     "@ngrx/effects": "^9.1.2",
     "@ngrx/entity": "^9.1.2",
     "@ngrx/store": "^9.1.2",
-    "kuzzle-sdk": "^7.2.0",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"
@@ -53,5 +52,8 @@
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
     "typescript": "~3.8.3"
+  },
+  "peerDependencies": {
+    "kuzzle-sdk": "~7.x"
   }
 }
