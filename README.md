@@ -1,5 +1,8 @@
 # KuzzleNgrx
 
+[![Version](https://img.shields.io/npm/v/kuzzle-ngrx.svg)](https://npmjs.org/package/kuzzle-ngrx)
+[![License](https://img.shields.io/npm/l/kuzzle-ngrx.svg)](https://github.com/gpulido/kuzzle-ngrx/blob/master/package.json)
+
 :warning: This readme is a WIP.
 
 This is a [Kuzzle](https://kuzzle.io/) Angular client library that allows to use kuzzle as  database backend authorization /realtime / file sharing.
