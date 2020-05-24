@@ -243,7 +243,7 @@ declare module 'kuzzle-sdk' {
     // Modules
     namespace KuzzleModules {
         interface Auth {
-            checkToken(token: string): Promise<{ valid: boolean, state: string, expired_at: number }>;
+            checkToken(token?: string): Promise<{ valid: boolean, state: string, expires_at: number }>;
             createMyCredentials(strategy: string, credentials: ObjectWithAnyKeys, options?: QueryOptions):
                 Promise<{ valid: boolean, state: string, expired_at: number }>;
             credentialsExist(strategy: string, options?: QueryOptions): Promise<boolean>;
