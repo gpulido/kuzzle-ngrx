@@ -50,9 +50,9 @@ export class KuzzleAuthService {
     ).pipe(
       switchMap((tk) => {
         if (tk.valid) {
-          return of(null).pipe(delay(tk.expires_at));
+          return of(true).pipe(delay(tk.expires_at));
         }
-        return of(null);
+        return of(false);
       })
     );
 
