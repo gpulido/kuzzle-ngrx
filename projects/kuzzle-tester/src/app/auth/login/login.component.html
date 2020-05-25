@@ -1,0 +1,24 @@
+<section class="login">
+  <form fxLayout fxLayoutAlign="center center" fxLayoutGap="10px" (ngSubmit)="onLogin(f)" #f="ngForm">
+    <mdc-card fxFlex="400px" fxFlex.xs="100%" style="padding: 1rem;">
+      <mdc-form-field fluid="true">
+        <mdc-text-field label="Username" ngModel name="username" outlined required></mdc-text-field>
+        <mdc-helper-text validation>*Required</mdc-helper-text>
+      </mdc-form-field>
+      <mdc-form-field fluid>
+        <mdc-text-field label="Password" ngModel name="password" outlined required type="password"></mdc-text-field>
+        <mdc-helper-text validation>*Required
+          <!-- <span *ngIf="f.controls['username'].hasError('required')"
+              >Password is required</span
+            > -->
+        </mdc-helper-text>
+      </mdc-form-field>
+      <mdc-card-actions fullBleed="true">
+        <mdc-linear-progress *ngIf="(isLoading$ | async)"></mdc-linear-progress>
+        <button *ngIf="!(isLoading$ | async)" style="text-align: center" mdc-button type="submit" mdcCardAction="button"
+          [disabled]="f.invalid">Login </button>
+             </mdc-card-actions>
+    </mdc-card>
+  </form>
+</section>
+
