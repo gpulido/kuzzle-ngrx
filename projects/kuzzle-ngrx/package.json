@@ -1,6 +1,6 @@
 {
   "name": "kuzzle-ngrx",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "description": "Angular ngrx extension to Kuzzle as backend",
   "author": {
     "name": "Gabriel Pulido de Torres"

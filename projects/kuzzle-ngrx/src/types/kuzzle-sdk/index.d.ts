@@ -254,7 +254,7 @@ declare module 'kuzzle-sdk' {
             getStrategies(options?: QueryOptions): Promise<string[]>;
             login(strategy: string, credentials?: ObjectWithAnyKeys, expiresIn?: string): Promise<string>;
             logout(): Promise<void>;
-            refreshToken(options?: QueryOptions): Promise<any>; // TODO
+            refreshToken(options?: QueryOptions): Promise<{ _id: string, expires_at: number, jwt: string, ttl: number }>; // TODO
             updateMyCredentials<Credentials>(strategy: string, credentials?: Credentials, options?: QueryOptions): Promise<Credentials>;
             updateSelf<KUser>(content: { [propName: string]: any; }, options?: QueryOptions): Promise<KuzzleUser<KUser>>;
             validateMyCredentials<KUser>(strategy: string, credentials?: ObjectWithAnyKeys, options?: QueryOptions): Promise<boolean>;
