@@ -2,7 +2,15 @@ import { Injectable } from '@angular/core';
 import { KuzzleService } from './kuzzle.service';
 import { Observable, from, of, merge, timer, Subject } from 'rxjs';
 import { KuzzleUser, ObjectWithAnyKeys } from 'kuzzle-sdk';
-import { filter, map, switchMap, first, delay, tap, distinctUntilChanged } from 'rxjs/operators';
+import {
+  filter,
+  map,
+  switchMap,
+  first,
+  delay,
+  tap,
+  distinctUntilChanged,
+} from 'rxjs/operators';
 
 export interface User {
   name: string;
@@ -22,20 +30,22 @@ export class KuzzleAuthService {
    */
   public readonly user$: Observable<User | null>;
 
+  public readonly jwtExpiration$: Observable<boolean>;
+
   private readonly logOut$: Subject<null> = new Subject<null>();
 
   private readonly tokenRefreshed$: Subject<{
     valid: boolean;
-    expires_at: number;
+    expiresAt: number;
   }> = new Subject<null>();
 
   constructor(private kuzzleService: KuzzleService) {
-    const currentUser$ = of(kuzzleService.kuzzle.authenticated);
 
-    const login$ = kuzzleService.kuzzleEvent().pipe(
+    const login$ = this.kuzzleService.kuzzleEvent().pipe(
       filter(
         (ke) => ke.event === 'loginAttempt' || ke.event === 'tokenExpired'
       ),
+      tap(ke => console.log('login$', ke)),
       map((ke) => {
         if (ke.data) {
           return ke.data.success;
@@ -44,22 +54,25 @@ export class KuzzleAuthService {
       })
     );
 
-    const jwtExpiration$ = merge(
-      from(kuzzleService.kuzzle.auth.checkToken()),
+    this.jwtExpiration$ = merge(
+      this.kuzzleService.checkToken(),
       this.tokenRefreshed$
     ).pipe(
+      tap(tk => console.log('jwtexpiration', tk?.expiresAt)),
       switchMap((tk) => {
         if (tk.valid) {
-          return of(true).pipe(delay(tk.expires_at));
+          return of(true).pipe(delay(tk.expiresAt));
         }
         return of(false);
       })
     );
 
-    this.user$ = merge(currentUser$, login$, jwtExpiration$).pipe(
+    this.user$ = merge(of(kuzzleService.kuzzle.authenticated), login$, this.jwtExpiration$, this.logOut$).pipe(
       distinctUntilChanged(),
       switchMap((b) =>
-        b ? from(kuzzleService.kuzzle.auth.getCurrentUser<User>()) : of(null)
+        b
+          ? from(this.kuzzleService.kuzzle.auth.getCurrentUser<User>())
+          : of(null)
       ),
       map((ku) => (ku ? ku.content : null))
     );
@@ -80,7 +93,7 @@ export class KuzzleAuthService {
     strategic: string,
     credentials: ObjectWithAnyKeys
   ): Observable<string> {
-    return from(this.kuzzleService.kuzzle.auth.login(strategic, credentials));
+    return from(this.kuzzleService.kuzzle.auth.login(strategic, credentials, '20s'));
   }
 
   public logout(): Observable<void> {
@@ -91,13 +104,13 @@ export class KuzzleAuthService {
 
   public refreshToken(): Observable<{
     _id: string;
-    expires_at: number;
+    expiresAt: number;
     jwt: string;
     ttl: number;
   }> {
     return from(this.kuzzleService.kuzzle.auth.refreshToken()).pipe(
       tap((tk) =>
-        this.tokenRefreshed$.next({ valid: true, expires_at: tk.expires_at })
+        this.tokenRefreshed$.next({ valid: true, expiresAt:tk.expiresAt })
       )
     );
   }

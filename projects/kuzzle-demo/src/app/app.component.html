@@ -1,4 +1,4 @@
-<mdc-drawer drawer="modal" #drawer>
+<!-- <mdc-drawer drawer="modal" #drawer>
   <mdc-drawer-header title="Kuzzle Ngrx DemoArchery Annotation"></mdc-drawer-header>
 
   <mdc-drawer-content>
@@ -8,8 +8,11 @@
 <app-header (sidenavToggle)="drawer.open = !drawer.open"></app-header>>
 <div class="demo-drawer-app-content">
   <main mdcTopAppBarFixedAdjust mdcDrawerAppContent>
-    <!-- <router-outlet></router-outlet> -->
+    <button mdcButton (click)="login()">Login</button>
+    <router-outlet></router-outlet>
   </main>
-</div>
-
-
+</div> -->
+  <button mdcButton (click)="subscribeToService()">Subscribe</button>
+  <button mdcButton (click)="login()">Login</button>
+  <button mdcButton (click)="logout()">Logout</button>
+  <button mdcButton (click)="test()">test</button>

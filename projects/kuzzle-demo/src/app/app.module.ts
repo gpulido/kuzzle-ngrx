@@ -11,8 +11,8 @@ import { StoreModule } from '@ngrx/store';
 
 
 const kuzzleConfig = {
-  endpoint: 'kuzzle.test.com',
-  index: 'my-index',
+  endpoint: 'kuzzle.gpulido.com',
+  index: 'annotation',
   options: {
     port: 443,
     sslConnection: true,
